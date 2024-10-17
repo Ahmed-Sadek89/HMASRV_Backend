@@ -10,10 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
-            $table->enum("role", ["admin", "assigned"])->default("assigned");
+            $table->string("title");
+            $table->text("description");
+            $table->foreignId("created_by")->constrained("users")->onDelete("cascade");
+            $table->foreignId("assigned_to")->constrained("users")->onDelete("cascade");
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('tasks');
     }
 };
