@@ -16,18 +16,19 @@ class TaskController extends Controller
         $data = [];
         foreach ($tasks->items() as $task) {
             array_push($data, [
-                'task_id' => $task->id,
-                'task_title' => $task->title,
-                'task_description' => $task->description,
+                'id' => $task->id,
+                'title' => $task->title,
+                'description' => $task->description,
                 'admin_user' => $task->admin ? $task->admin->username : 'No admin assigned',
                 'assigned_user' => $task->assignedUser ? $task->assignedUser->username : 'No assigned user',
+                "created_at" => $task->created_at
             ]);
         }
         return $data;
     }
     public function index()
     {
-        $tasks = Task::with(['admin', 'assignedUser'])->paginate(10);
+        $tasks = Task::with(['admin', 'assignedUser'])->orderBy("id", "desc")->paginate(10);
 
         return response()->json([
             'data' => $this->getUsersPerTask($tasks),

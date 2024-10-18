@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     use HasFactory;
+    protected $guarded = [];
     public function assignedTasks()
     {
         return $this->hasMany(Task::class, 'assigned_to');

@@ -26,21 +26,19 @@ class UserController extends Controller
 
     public function topAssignedUsers()
     {
-        // Get users with their task count, ordered by the number of assigned tasks, and where assigned_tasks_count > 0
         $users = User::withCount('assignedTasks')
-            ->having('assigned_tasks_count', '>', 0) // Only include users with assigned tasks > 0
-            ->orderBy('assigned_tasks_count', 'desc') // order by the count of assigned tasks
-            ->limit(10) // limit to top 10 users
+            ->having('assigned_tasks_count', '>', 0)
+            ->orderBy('assigned_tasks_count', 'desc')
+            ->limit(10)
             ->get();
 
-        // Prepare the response
         $data = $users->map(function ($user) {
             return [
                 'username' => $user->username,
-                'assigned_tasks_count' => $user->assigned_tasks_count,
+                'number_of_tasks' => $user->assigned_tasks_count,
             ];
         });
 
-        return response()->json($data, 200); // return as JSON response
+        return response()->json($data, 200);
     }
 }
