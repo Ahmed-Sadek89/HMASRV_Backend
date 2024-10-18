@@ -19,7 +19,7 @@ class UserController extends Controller
                 'error' => 'Invalid role. Please use "admin" or "assigned".'
             ], 400);
         }
-        $user = $user = User::where("role", $role)->get();
+        $user = $user = User::select(columns: ["id", "username"])->where("role", $role)->get();
 
         return response()->json($user);
     }
