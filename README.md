@@ -25,3 +25,10 @@
 
 ## Documentation
 https://documenter.getpostman.com/view/18043505/2sAXxWYUQp
+
+### Time for developing
+date: from 16/10 to 17/10/2024
+- Migration with database and seed -> 2 Hours
+- Make Model and controllers -> 4 hours
+- Testing -> 8 hours
+
