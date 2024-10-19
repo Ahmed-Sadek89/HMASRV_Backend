@@ -32,9 +32,6 @@ class TaskController extends Controller
 
         return response()->json([
             'data' => $this->getUsersPerTask($tasks),
-            'current_page' => $tasks->currentPage(),
-            'last_page' => $tasks->lastPage(),
-            'per_page' => $tasks->perPage(),
             'total' => $tasks->total(),
         ]);
     }
